@@ -1,7 +1,3 @@
-Got it, bro! Here's your clean **`README.md`** that **only includes the explanation/comments** — **no actual code** — just the full flow of how the system works, written as a guide for someone reading the project.
-
----
-
 ## 🔐 Secure Password Generator (Web-Based)
 
 This is a beginner-friendly web app that generates secure passwords based on user preferences. Built with Flask (Python) and a minimal web frontend, it’s a great starting point for anyone learning SaaS concepts or web development.
@@ -75,5 +71,3 @@ secure-password-generator/
 5. **Frontend displays result** → user can copy it to clipboard
 
 ---
-
-Let me know if you also want a version in PDF format, GitHub-ready markdown, or translated in Khmer too.
