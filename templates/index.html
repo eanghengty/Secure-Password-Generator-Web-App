@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Secure Password Generator
+        </title>
+        <script src="https://cdn.tailwindcss.com">
+
+        </script>
+
+    </head>
+    <body class="bg-gray-100 p-6 flex items-center justify-center h-screen">
+        <div class="bg-white p-8 rounded-xl shadow-xl max-w-md w-full space-y-4">
+            <h1 class="text-2xl font-bold">
+                🔐 Secure Password Generator
+            </h1>
+            <label>
+                Password Length:
+                <input type="number" id="length" value="12" class="border p-2 rounded w-full" min="4" max="50">
+            </label>
+            <label>
+                <input type="checkbox" id="uppercase"> Include uppercase
+            </label>
+            <label for="">
+                <input type="checkbox" id="numbers"> Include Numbers
+            </label>
+            <label for="">
+                <input type="checkbox" id="symbols"> Include Symbols
+            </label>
+
+
+            <button onclick="generatePassword()" class="bg-blue-600 text-white px-4 py-2 rounded w-full">
+                🔁 Generate Password
+            </button>
+
+            <div>
+                <strong>Your Password: </strong>
+                <div id="result" class="font-mono bg-gray-100 p-4 rounded mt-1"></div>
+                <button onclick="copyPassword()" class="mt-2 text-blue-500 underline">📋 Copy</button>
+            </div>
+
+        </div>
+        
+        <script>
+            function generatePassword(){
+                const length=document.getElementById('length').value;
+                const uppercase=document.getElementById('uppercase').checked;
+                const numbers=document.getElementById('numbers').checked;
+                const symbols=document.getElementById('symbols').checked;
+
+                fetch('/generate',{
+                    method:'POST',
+                    headers:{'Content-Type':'application/json'},
+                    body: JSON.stringify({length,uppercase,numbers,symbols})
+                })
+                .then(res=>res.json())
+                .then(data=>{
+                    document.getElementById('result').innerText=data.password || data.error;
+                })
+            }
+
+            function copyPassword(){
+                const text=document.getElementById('result').innerText;
+                navigator.clipboard.writeText(text).then(()=>{
+                    alert("Password copied!");
+                });
+            }
+
+        </script>
+    </body>
+</html>
