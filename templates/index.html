@@ -42,27 +42,31 @@
         </div>
         
         <script>
+            // function to generate the password
             function generatePassword(){
+                // get form values
                 const length=document.getElementById('length').value;
                 const uppercase=document.getElementById('uppercase').checked;
                 const numbers=document.getElementById('numbers').checked;
                 const symbols=document.getElementById('symbols').checked;
-
+                // send post request to backend
                 fetch('/generate',{
                     method:'POST',
                     headers:{'Content-Type':'application/json'},
                     body: JSON.stringify({length,uppercase,numbers,symbols})
                 })
-                .then(res=>res.json())
+                .then(res=>res.json()) //convert response to json
                 .then(data=>{
+                    //display password or error
                     document.getElementById('result').innerText=data.password || data.error;
                 })
             }
 
+            // function to copy password to clipboard
             function copyPassword(){
                 const text=document.getElementById('result').innerText;
                 navigator.clipboard.writeText(text).then(()=>{
-                    alert("Password copied!");
+                    alert("Password copied!"); //notify user
                 });
             }
 
